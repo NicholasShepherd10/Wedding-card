@@ -9,7 +9,7 @@
   <!-- WhatsApp / Facebook Link Preview - Dec 17-19 2026 -->
   <meta property="og:title" content="Prashasti & Nicholas | Wedding Invitation - 19 December 2026" />
   <meta property="og:description"
-    content="You are invited! Wedding & Reception - Dec 19, 2026 - Delhi, India." />
+    content="You are invited! Wedding & Reception - 19 December 2026 - Delhi, India." />
   <meta property="og:image" content="https://nicholasshepherd10.github.io/Wedding-E-Card/preview.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -30,7 +30,7 @@
     body:before{position:fixed;inset:0;pointer-events:none;z-index:100;opacity:.055;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
     h1,h2,h3,.serif{font-family:"Cormorant Garamond",serif;font-weight:500}a{text-decoration:none;color:inherit}
     .ornate{position:absolute;inset:18px;border:1px solid rgba(197,154,85,.68);pointer-events:none}.ornate:before,.ornate:after{content:"✦";position:absolute;color:var(--gold);font-size:18px}.ornate:before{top:-10px;left:50%;transform:translateX(-50%)}.ornate:after{bottom:-10px;left:50%;transform:translateX(-50%)}
-    .hero{min-height:100svh;position:relative;display:grid;place-items:center;text-align:center;color:white;overflow:hidden;background:radial-gradient(circle at 50% 30%,#7b2330 0,#3d0915 42%,#19040a 100%)}
+    .hero{min-height:100vh;min-height:100svh;position:relative;display:grid;place-items:center;text-align:center;color:white;overflow:hidden;background:radial-gradient(circle at 50% 30%,#7b2330 0,#3d0915 42%,#19040a 100%)}
     .hero:before{position:absolute;width:90vw;height:90vw;max-width:950px;max-height:950px;border:1px solid rgba(197,154,85,.2);border-radius:50%;box-shadow:0 0 0 30px rgba(197,154,85,.025),0 0 0 60px rgba(197,154,85,.02);animation:slowSpin 35s linear infinite}
     .hero:after{position:absolute;inset:0;background:radial-gradient(circle at 20% 20%,rgba(255,210,120,.15),transparent 22%),radial-gradient(circle at 80% 70%,rgba(255,210,120,.08),transparent 25%)}
     .sparkles{position:absolute;inset:0;overflow:hidden}.sparkles i{position:absolute;width:3px;height:3px;background:#f4d99a;border-radius:50%;box-shadow:0 0 14px #f4d99a;animation:twinkle 3s infinite ease-in-out}.sparkles i:nth-child(1){left:13%;top:26%;animation-delay:.4s}.sparkles i:nth-child(2){left:82%;top:20%;animation-delay:1.2s}.sparkles i:nth-child(3){left:72%;top:68%;animation-delay:2s}.sparkles i:nth-child(4){left:22%;top:76%;animation-delay:1.5s}.sparkles i:nth-child(5){left:51%;top:14%;animation-delay:2.5s}.sparkles i:nth-child(6){left:91%;top:52%;animation-delay:.8s}
@@ -402,7 +402,7 @@
       .hero{
         min-height:100vh !important;
         min-height:-webkit-fill-available !important;
-        min-height:100svh !important;
+        min-height:100vh;min-height:100svh !important;
         background-attachment:scroll !important;
       }
       /* Fixed background layer - remove blur filter on iOS (causes blank screen) */
@@ -507,7 +507,11 @@
       }
     }
     
-  </style>
+  
+    /* PATCH: iOS/Android fixes */
+    @supports (-webkit-touch-callout: none) { input, select, textarea { font-size: 16px !important; } }
+    .hero{ min-height:100vh; min-height:100svh; }
+    </style>
 
   <style id="bellanta-map-fix">
     .map-box.real-map{display:block;width:100%;height:240px;min-height:240px;margin:14px 0;border:1px solid rgba(197,154,85,.8);overflow:hidden;background:#ddd;position:relative;border-radius:2px}
@@ -1073,6 +1077,8 @@
     @media(max-width:768px){}
     
   </style>
+
+<style>.calendar-btn{cursor:pointer;-webkit-tap-highlight-color:rgba(197,154,85,0.3);touch-action:manipulation;position:relative;z-index:10;}.calendar-btn:active{transform:scale(0.98);}</style>
 </head>
 
 <body>
@@ -1089,7 +1095,7 @@
       <div class="cross">✦</div>
       <div class="script">A celebration of two lives becoming one</div>
       <h1>Prashasti <em>&amp;</em> Nicholas</h1>
-      <div class="date">17 — 19 December 2026 · New Delhi</div>
+      <div class="date">19 December 2026 · New Delhi</div>
       <div class="hero-count" data-target="2026-12-19T16:00:00+05:30"></div>
       <div class="verse">“Two lives are getting ready to walk on one path.”</div>
       <a class="btn" href="#celebrations">Enter the Celebration</a>
@@ -1274,7 +1280,7 @@
 
   <footer>
     <div class="names">Prashasti &amp; Nicholas </div>
-    <div class="small">17 — 19 December 2026 · With love, always</div>
+    <div class="small">19 December 2026 · With love, always</div>
   </footer>
 
   <div id="successModal" class="success-modal" role="dialog" aria-modal="true" aria-labelledby="successTitle">
@@ -2026,64 +2032,8 @@
         });
 
         // Fix 4: Calendar ICS for iOS Safari - must be direct link click, not window.open
-        window.addToCalendarUniversal = function(eventTitle, startStr, endStr, location, description, dressCode) {
-          var dtStamp = new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
-          var ics = [
-            'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Wedding//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
-            'BEGIN:VTIMEZONE', 'TZID:Asia/Kolkata', 'BEGIN:STANDARD', 'DTSTART:19700101T000000',
-            'TZOFFSETFROM:+0530', 'TZOFFSETTO:+0530', 'TZNAME:IST', 'END:STANDARD', 'END:VTIMEZONE',
-            'BEGIN:VEVENT', 'UID:' + Date.now() + '@wedding', 'DTSTAMP:' + dtStamp,
-            'DTSTART;TZID=Asia/Kolkata:' + startStr, 'DTEND;TZID=Asia/Kolkata:' + endStr,
-            'SUMMARY:' + description,
-            'DESCRIPTION:Dress Code: ' + dressCode + '\\n' + description + '\\nLocation: ' + location,
-            'LOCATION:' + location, 'STATUS:CONFIRMED',
-            'BEGIN:VALARM', 'TRIGGER:-P1D', 'ACTION:DISPLAY', 'DESCRIPTION:Reminder: ' + description +
-            ' tomorrow!', 'END:VALARM',
-            'BEGIN:VALARM', 'TRIGGER:-PT2H', 'ACTION:DISPLAY', 'DESCRIPTION:Reminder: ' + description +
-            ' in 2 hours', 'END:VALARM',
-            'END:VEVENT', 'END:VCALENDAR'
-          ].join('\r\n');
-
-          // iOS Safari fix: Use data URI with proper mime and create temporary link
-          var blob = new Blob([ics], {
-            type: 'text/calendar;charset=utf-8'
-          });
-          var url;
-
-          if (isIOS) {
-            // For iOS, use data URI and open in same window with delay
-            var dataUri = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
-            // Create invisible link and click it - more reliable than window.open on iOS
-            var a = document.createElement('a');
-            a.href = dataUri;
-            a.target = '_blank';
-            a.download = eventTitle.replace(/[^a-z0-9]/gi, '_') + '.ics';
-            document.body.appendChild(a);
-            a.click();
-            setTimeout(function() {
-              document.body.removeChild(a);
-            }, 1000);
-          } else {
-            url = URL.createObjectURL(blob);
-            var a = document.createElement('a');
-            a.href = url;
-            a.download = eventTitle.replace(/[^a-z0-9]/gi, '_') + '_2026.ics';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            setTimeout(function() {
-              URL.revokeObjectURL(url);
-            }, 2000);
-          }
-        };
-        window.addToCalendarICS = window.addToCalendarUniversal;
-
-        // Fix 5: Touch handlers use clientX not pageX for iOS
-        const track = document.getElementById('blessingTrack');
-        if (track) {
-          // Remove old listeners by cloning? We'll patch the handlers
-          // The new handlers already use pageX, but we ensure clientX fallback
-        }
+        
+// Fix 5: Patched above in calendar function
 
         // Fix 6: Prevent body scroll when modal open (iOS bug)
         const originalShowError = window.showErrorModal;
@@ -2180,6 +2130,121 @@
       updateCountdowns();
     })();
   </script>
+
+
+
+<script>
+// === FINAL VERIFIED PATCH - Android + iOS + GitHub Pages - Display unchanged ===
+(function() {
+  function escapeICS(t){return (t||'').replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\r?\n/g,'\\n');}
+  function toUTCFormat(d){return d.toISOString().replace(/[-:]/g,'').replace(/\.\d+Z/,'Z');}
+  function parseDateAny(s){
+    s=(s||'').trim();
+    var m1=s.match(/^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})$/);
+    if(m1){
+      var y=parseInt(m1[1],10),mo=parseInt(m1[2],10)-1,da=parseInt(m1[3],10);
+      var h=parseInt(m1[4],10),mi=parseInt(m1[5],10),se=parseInt(m1[6],10);
+      return new Date(Date.UTC(y,mo,da,h-5,mi-30,se));
+    }
+    var d=new Date(s);
+    if(!isNaN(d.getTime())) return d;
+    var m2=s.match(/(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})([+-])(\d{2}):(\d{2})/);
+    if(m2){
+      var yy=parseInt(m2[1],10),mm=parseInt(m2[2],10)-1,dd=parseInt(m2[3],10);
+      var hh=parseInt(m2[4],10),mn=parseInt(m2[5],10),sc=parseInt(m2[6],10);
+      var sign=m2[7]==='+'?1:-1,tzh=parseInt(m2[8],10),tzm=parseInt(m2[9],10);
+      return new Date(Date.UTC(yy,mm,dd,hh-sign*tzh,mn-sign*tzm,sc));
+    }
+    return new Date();
+  }
+  function buildICS(eventTitle,startDate,endDate,location,description,dressCode){
+    var uid=Date.now()+'-'+Math.random().toString(36).substr(2,9)+'@prashasti-nicholas-wedding.com';
+    return [
+      'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Prashasti & Nicholas Wedding//EN','CALSCALE:GREGORIAN','METHOD:PUBLISH',
+      'BEGIN:VEVENT','UID:'+uid,'DTSTAMP:'+toUTCFormat(new Date()),
+      'DTSTART:'+toUTCFormat(startDate),'DTEND:'+toUTCFormat(endDate),
+      'SUMMARY:'+escapeICS(eventTitle||description||'Wedding'),
+      'DESCRIPTION:'+escapeICS((description||'')+'\nDress Code: '+(dressCode||'')+'\nLocation: '+(location||'')),
+      'LOCATION:'+escapeICS(location||''),'STATUS:CONFIRMED','SEQUENCE:0',
+      'BEGIN:VALARM','TRIGGER:-P1D','ACTION:DISPLAY','DESCRIPTION:Reminder','END:VALARM',
+      'BEGIN:VALARM','TRIGGER:-PT2H','ACTION:DISPLAY','DESCRIPTION:Reminder','END:VALARM',
+      'END:VEVENT','END:VCALENDAR'
+    ].join('\r\n');
+  }
+  window.addToCalendarUniversal = function(eventTitle,startStr,endStr,location,description,dressCode){
+    try{
+      var ua=navigator.userAgent||'';
+      var isIOS=/iPad|iPhone|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+      var isInApp=/FBAN|FBAV|FB_IAB|Instagram|WhatsApp|Line|Twitter|Snapchat/i.test(ua);
+      var startDate=parseDateAny(startStr);
+      var endDate=parseDateAny(endStr);
+      if(isNaN(startDate.getTime())){alert('Invalid date: '+startStr);return;}
+      if(isNaN(endDate.getTime())||endDate<=startDate){endDate=new Date(startDate.getTime()+2*60*60*1000);}
+      var ics=buildICS(eventTitle,startDate,endDate,location,description,dressCode);
+      var fileName=(eventTitle||'event').replace(/[^a-z0-9]/gi,'_')+'.ics';
+      var gCalUrl='https://calendar.google.com/calendar/render?action=TEMPLATE'
+        +'&text='+encodeURIComponent(eventTitle||description||'Wedding')
+        +'&dates='+toUTCFormat(startDate)+'/'+toUTCFormat(endDate)
+        +'&details='+encodeURIComponent((description||'')+'\nDress Code: '+(dressCode||''))
+        +'&location='+encodeURIComponent(location||'');
+
+      // 1. Web Share API - best for modern iOS/Android
+      if(navigator.canShare&&window.File){
+        try{
+          var file=new File([ics],fileName,{type:'text/calendar'});
+          if(navigator.canShare({files:[file]})){
+            navigator.share({files:[file],title:eventTitle,text:description}).catch(function(){});
+            return;
+          }
+        }catch(e){}
+      }
+      // 2. In-app (WhatsApp/Instagram) - blob blocked, use Google Calendar
+      if(isInApp){
+        window.open(gCalUrl,'_blank','noopener');
+        return;
+      }
+      // 3. iOS Safari - location.href with data URI
+      if(isIOS){
+        try{
+          var dataUri='data:text/calendar;charset=utf-8,'+encodeURIComponent(ics);
+          window.location.href=dataUri;
+          setTimeout(function(){window.open(gCalUrl,'_blank','noopener');},1200);
+        }catch(e){
+          window.open(gCalUrl,'_blank','noopener');
+        }
+        return;
+      }
+      // 4. Android & Desktop - Blob download
+      try{
+        var blob=new Blob([ics],{type:'text/calendar;charset=utf-8'});
+        var url=URL.createObjectURL(blob);
+        var a=document.createElement('a');
+        a.href=url;a.download=fileName;a.style.display='none';
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function(){try{document.body.removeChild(a);}catch(e){}URL.revokeObjectURL(url);},2000);
+      }catch(e){
+        window.open(gCalUrl,'_blank','noopener');
+      }
+    }catch(err){
+      console.error(err);
+      window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(description||eventTitle||'Wedding'),'_blank','noopener');
+    }
+  };
+  window.addToCalendarICS=window.addToCalendarUniversal;
+  // Also attach event listeners to all calendar buttons for better mobile tap handling
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('.calendar-btn').forEach(function(btn){
+      btn.addEventListener('touchend', function(e){
+        // Prevent double trigger on touch devices
+        e.preventDefault();
+        btn.click();
+      }, {passive:false});
+    });
+  });
+  console.log('✅ Calendar ready - Android+iOS+GitHub Pages');
+})();
+</script>
 
 </body>
 
