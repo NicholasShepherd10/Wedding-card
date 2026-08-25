@@ -16,6 +16,7 @@
   <meta property="og:image:type" content="image/jpeg" />
   <meta property="og:url" content="https://nicholasshepherd10.github.io/Wedding-E-Card/" />
   <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#4d0e1b" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://nicholasshepherd10.github.io/Wedding-E-Card/preview.jpg" />
 
@@ -55,7 +56,7 @@
     
     .location{margin-top:22px;padding-top:18px;border-top:1px solid rgba(197,154,85,.25)}.location-label{font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:600}.location-name{font-family:"Cormorant Garamond",serif;font-size:1.35rem;color:var(--wine);margin:6px 0 3px}.location-address{font-size:.78rem;line-height:1.55;color:var(--muted);max-width:460px}.map-btn{display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:11px 15px;border:1px solid rgba(197,154,85,.55);color:var(--wine);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;transition:.3s}.map-btn:hover{background:var(--wine);color:#fff}.map-box{margin-top:14px;border:1px solid rgba(197,154,85,.3);height:150px;overflow:hidden;position:relative;background:linear-gradient(135deg,#eee6d7,#d9cbb3)}.map-box:before{position:absolute;inset:0;background:linear-gradient(25deg,transparent 45%,rgba(120,100,70,.22) 46%,rgba(120,100,70,.22) 48%,transparent 49%),linear-gradient(105deg,transparent 54%,rgba(120,100,70,.18) 55%,rgba(120,100,70,.18) 57%,transparent 58%);opacity:.8}.map-pin{position:absolute;left:50%;top:50%;transform:translate(-50%,-58%);width:27px;height:27px;border-radius:50% 50% 50% 0;background:var(--wine);rotate:-45deg;box-shadow:0 5px 14px #0003}.map-pin:after{position:absolute;width:9px;height:9px;border-radius:50%;background:#fff;left:9px;top:9px}.map-caption{position:absolute;left:12px;bottom:9px;background:#fffdf8e8;padding:6px 9px;font-size:.58rem;color:var(--wine);letter-spacing:.04em}
     .faith{padding:105px 7vw;background:radial-gradient(circle at 50% 35%,#7b2330 0,#4d0e1b 48%,#25080f 100%);color:white;text-align:center;position:relative;overflow:hidden;isolation:isolate;}
-    .faith:before{content:"✝";position:absolute;font-size:32rem;line-height:1;color:rgba(255,255,255,0.08);left:50%;top:50%;transform:translate(-50%,-48%);font-family:"Cormorant Garamond",serif;pointer-events:none;z-index:0;-webkit-transform:translate(-50%,-48%);will-change:transform;}.faith-inner{position:relative;z-index:2;isolation:isolate;}
+    .faith:before{content:"✝\FE0E";position:absolute;font-size:32rem;line-height:1;color:rgba(255,255,255,0.08);left:50%;top:50%;transform:translate(-50%,-48%);font-family:"Cormorant Garamond",serif;pointer-events:none;z-index:0;-webkit-transform:translate(-50%,-48%);will-change:transform;}.faith-inner{position:relative;z-index:2;isolation:isolate;}
     .faith h2{font-size:clamp(2rem,5.5vw,4.2rem);max-width:900px;margin:20px auto 16px;line-height:1.2;position:relative;z-index:2;text-shadow:0 2px 12px rgba(0,0,0,0.3);}
     .faith p{color:#e6d7c5;max-width:650px;margin:auto;line-height:1.8;position:relative;z-index:2;}
     .verse-ref{position:relative;z-index:2;color:#c59a55;margin-top:18px;font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;}
@@ -292,7 +293,7 @@
     #celebrations .location-label{
       color:#4d0e1b !important;
       font-weight:800 !important;
-      font-size:0.62rem !important;
+      font-size:0.82rem !important;
       letter-spacing:0.18em !important;
       background:rgba(77,14,27,0.08) !important;
       padding:4px 10px !important;
@@ -304,7 +305,7 @@
     #celebrations .location-name{
       color:#241a18 !important;
       font-weight:700 !important;
-      font-size:1.05rem !important;
+      font-size:1.70rem !important;
     }
     #celebrations .location-address{
       color:#4a3f38 !important;
@@ -417,10 +418,14 @@
         transform:translateZ(0) !important;
         -webkit-transform:translateZ(0) !important;
       }
-      /* Body grain texture - fixed causes flicker on iOS */
+      /* Body grain texture - the SVG feTurbulence filter this uses has a known
+         WebKit/iOS rendering bug where it can tint saturated background colors
+         underneath it (this is what was causing sections like .faith to render
+         with a purple tint instead of their correct maroon). Simply hiding it
+         on iOS is the reliable fix; it's a subtle decorative touch, not worth
+         the color bug. */
       body:before{
-        position:absolute !important;
-        -webkit-transform:translateZ(0) !important;
+        display:none !important;
       }
       /* Blessing text scroll - iOS needs overflow scroll */
       .blessing-text{
@@ -500,6 +505,10 @@
         color:rgba(255,255,255,0.05) !important;
         opacity:0.6 !important;
         z-index:0 !important;
+        will-change:auto !important;
+      }
+      .faith{
+        isolation:auto !important;
       }
       .faith .faith-inner{
         z-index:2 !important;
@@ -844,7 +853,7 @@
   <style id="blessings-upgrade">
     .hero-inner{padding-bottom:105px}.scroll{bottom:10px;transform:translateY(6px);text-align:center}
     .photo:after{background:linear-gradient(180deg,rgba(20,5,8,.03),rgba(20,5,8,.48))}.photo:before{inset:18px}
-    .blessings{padding:105px 6vw;background:linear-gradient(135deg,#26070d,#4d0e1b 50%,#26070d);color:#fff;position:relative;overflow:hidden}.blessings:before{content:'✝';position:absolute;right:-80px;top:-120px;font-family:'Cormorant Garamond';font-size:30rem;color:#fff1;line-height:1}.blessing-head{position:relative;z-index:2;text-align:center}.blessing-head h2{font-size:clamp(3rem,7vw,5.5rem);margin:10px;color:#f4dfb1}.blessing-head p{max-width:650px;margin:auto;color:#e8d8c7;line-height:1.8}.blessing-layout{position:relative;z-index:2;max-width:1180px;margin:45px auto 0;display:grid;grid-template-columns:330px 1fr;gap:35px}.blessing-form-card{background:#fffaf1;color:var(--ink);padding:30px;border:1px solid #c59a5570;box-shadow:0 20px 60px #0004}.blessing-form-card h3{font-size:2.2rem;color:var(--wine);margin:0 0 8px}.blessing-form-card p{font-size:.8rem;color:var(--muted);line-height:1.7}.blessing-form{display:grid;gap:11px;margin:20px 0}.blessing-form textarea{min-height:150px;grid-column:auto}.blessing-form .submit{grid-column:auto}.blessing-note{font-size:.62rem;color:var(--muted);line-height:1.5;margin-top:10px}.blessing-scroller{min-width:0;overflow:hidden}.blessing-track{scroll-behavior:smooth;display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 4px 22px;scrollbar-width:thin}.blessing-track::-webkit-scrollbar{height:7px}.blessing-track::-webkit-scrollbar-thumb{background:#c59a55;border-radius:20px}.blessing-card{flex:0 0 min(330px,78vw);min-height:235px;background:linear-gradient(145deg,#fffaf1,#f3e4c5);color:var(--ink);border:1px solid #c59a55aa;box-shadow:0 18px 45px #0004;padding:30px 26px;scroll-snap-align:start;position:relative}.blessing-card:before{content:'“';font-family:'Cormorant Garamond';font-size:5rem;line-height:.7;color:#c59a5560;position:absolute;top:22px;left:18px}.blessing-text{font-family:'Cormorant Garamond';font-size:1.35rem;line-height:1.55;font-style:italic;margin-top:25px}.blessing-from{margin-top:18px;color:var(--wine);font-size:.66rem;letter-spacing:.15em;text-transform:uppercase;font-weight:700}.blessing-date{font-size:.58rem;color:var(--muted);margin-top:6px}.blessing-empty{color:#eadfcf;padding:50px 25px;text-align:center;border:1px dashed #c59a5570}.blessing-controls{display:flex;justify-content:center;gap:10px;margin-top:4px}.blessing-arrow{width:42px;height:42px;border:1px solid #c59a55;color:#f3dfb0;background:transparent;border-radius:50%;cursor:pointer}.blessing-arrow:hover{background:#c59a55;color:var(--wine)}
+    .blessings{padding:105px 6vw;background:linear-gradient(135deg,#26070d,#4d0e1b 50%,#26070d);color:#fff;position:relative;overflow:hidden}.blessings:before{content:'✝\FE0E';position:absolute;right:-80px;top:-120px;font-family:'Cormorant Garamond';font-size:30rem;color:#fff1;line-height:1}.blessing-head{position:relative;z-index:2;text-align:center}.blessing-head h2{font-size:clamp(3rem,7vw,5.5rem);margin:10px;color:#f4dfb1}.blessing-head p{max-width:650px;margin:auto;color:#e8d8c7;line-height:1.8}.blessing-layout{position:relative;z-index:2;max-width:1180px;margin:45px auto 0;display:grid;grid-template-columns:330px 1fr;gap:35px}.blessing-form-card{background:#fffaf1;color:var(--ink);padding:30px;border:1px solid #c59a5570;box-shadow:0 20px 60px #0004}.blessing-form-card h3{font-size:2.2rem;color:var(--wine);margin:0 0 8px}.blessing-form-card p{font-size:.8rem;color:var(--muted);line-height:1.7}.blessing-form{display:grid;gap:11px;margin:20px 0}.blessing-form textarea{min-height:150px;grid-column:auto}.blessing-form .submit{grid-column:auto}.blessing-note{font-size:.62rem;color:var(--muted);line-height:1.5;margin-top:10px}.blessing-scroller{min-width:0;overflow:hidden}.blessing-track{scroll-behavior:smooth;display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 4px 22px;scrollbar-width:thin}.blessing-track::-webkit-scrollbar{height:7px}.blessing-track::-webkit-scrollbar-thumb{background:#c59a55;border-radius:20px}.blessing-card{flex:0 0 min(330px,78vw);min-height:235px;background:linear-gradient(145deg,#fffaf1,#f3e4c5);color:var(--ink);border:1px solid #c59a55aa;box-shadow:0 18px 45px #0004;padding:30px 26px;scroll-snap-align:start;position:relative}.blessing-card:before{content:'“';font-family:'Cormorant Garamond';font-size:5rem;line-height:.7;color:#c59a5560;position:absolute;top:22px;left:18px}.blessing-text{font-family:'Cormorant Garamond';font-size:1.35rem;line-height:1.55;font-style:italic;margin-top:25px}.blessing-from{margin-top:18px;color:var(--wine);font-size:.66rem;letter-spacing:.15em;text-transform:uppercase;font-weight:700}.blessing-date{font-size:.58rem;color:var(--muted);margin-top:6px}.blessing-empty{color:#eadfcf;padding:50px 25px;text-align:center;border:1px dashed #c59a5570}.blessing-controls{display:flex;justify-content:center;gap:10px;margin-top:4px}.blessing-arrow{width:42px;height:42px;border:1px solid #c59a55;color:#f3dfb0;background:transparent;border-radius:50%;cursor:pointer}.blessing-arrow:hover{background:#c59a55;color:var(--wine)}
     @media(max-width:800px){.hero-inner{padding-bottom:125px}.blessing-layout{grid-template-columns:1fr}.blessing-form-card{max-width:620px;margin:auto;width:100%}.blessings{padding:80px 5vw}}
     
     /* ===== KEEP V10 SIZING + FIXES FOR SLIDER, QUOTES, SCROLL, MOBILE ===== */
@@ -971,7 +980,10 @@
     .event.reception{position:relative}
     .event.reception:after{content:"✦  ✧  ✦  ✧  ✦";position:absolute;right:5%;top:7%;color:#c59a55aa;font-size:1.1rem;letter-spacing:1.2rem;animation:receptionSparkle 2.8s ease-in-out infinite}
     @keyframes receptionSparkle{0%,100%{opacity:.25;transform:translateY(0)}50%{opacity:1;transform:translateY(8px)}}
-    @media(prefers-reduced-motion:reduce){.petal,.gold-dust,.heart,.hero-gold-sweep,.church-walkers,.walker,.event.reception:after{animation:none!important}.motion-layer{display:none!important}}
+    /* NOTE: previously this section disabled all decorative animation (petals,
+       gold dust, hearts, sweeps) when the device's "Reduce Motion" accessibility
+       setting was on. Per request, the animation now always plays regardless of
+       that setting. */
     
     /* ===== KEEP V10 SIZING + FIXES FOR SLIDER, QUOTES, SCROLL, MOBILE ===== */
     .blessings{overflow:hidden}
@@ -1108,8 +1120,7 @@
       <div class="divider">✦</div>
       <div class="eyebrow">Our wedding weekend</div>
       <h2>One love. Two traditions. A lifetime to celebrate.</h2>
-      <p>With joyful hearts, we invite you to witness and celebrate our journey — beginning with an evening of
-        cocktails, followed by colourful Indian traditions, a sacred church wedding and a grand reception.</p>
+      <p>With joyful hearts, we invite you to witness and celebrate our journey — beginning with a sacred church wedding and a grand reception.</p>
     </div>
   </section>
 
@@ -1117,12 +1128,12 @@
     <div class="section-title reveal">
       <div class="eyebrow">Save the dates</div>
       <h2>The Celebration</h2>
-      <p>Each moment has its own mood, colours and story — three days, four beautiful moments, one beginning.</p>
+      <p>Each moment has its own mood, colours and story — One day, Two beautiful moments, One beginning.</p>
     </div>
 
     <article class="event matrimony reveal">
       <div class="copy">
-        <span class="tag">19 December · Sacred Ceremony</span>
+        <span class="tag">19 December · Church Wedding</span>
         <h3>Holy Matrimony</h3>
         <div class="time">Church Wedding · 4:00 PM</div>
         <div class="countdown-title">Countdown</div>
@@ -1148,9 +1159,10 @@
             </div>
           </div>
           <div class="calendar-actions">
-            <button class="calendar-btn" type="button"
-              onclick="addToCalendarICS('Holy Matrimony', '20261219T160000', '20261219T180000', 'Centenary Methodist Church, Lodhi Road, New Delhi', 'Prashasti & Nicholas - Holy Matrimony', 'Tux and Dress')">📥
-              Add to Calendar with Reminder</button>
+            <a class="calendar-btn" href="#" data-ics-title="Holy Matrimony" data-ics-start="20261219T160000"
+              data-ics-end="20261219T180000" data-ics-location="Centenary Methodist Church, Lodhi Road, New Delhi"
+              data-ics-desc="Prashasti &amp; Nicholas - Holy Matrimony" data-ics-dress="Tux and Dress">📥
+              Add to Calendar with Reminder</a>
           </div>
 
         </div>
@@ -1186,9 +1198,10 @@
             </div>
           </div>
           <div class="calendar-actions">
-            <button class="calendar-btn" type="button"
-              onclick="addToCalendarICS('The Reception', '20261219T200000', '20261220T000000', 'Bel-La Monde Hotel, Rangpuri, New Delhi', 'Prashasti & Nicholas - Wedding Reception', 'Wedding Ethnics')">📥
-              Add to Calendar with Reminder</button>
+            <a class="calendar-btn" href="#" data-ics-title="The Reception" data-ics-start="20261219T200000"
+              data-ics-end="20261220T000000" data-ics-location="Bel-La Monde Hotel, Rangpuri, New Delhi"
+              data-ics-desc="Prashasti &amp; Nicholas - Wedding Reception" data-ics-dress="Wedding Ethnics">📥
+              Add to Calendar with Reminder</a>
           </div>
 
         </div>
@@ -1221,9 +1234,7 @@
         <h3>Send Your Blessing</h3>
         <p>Write a prayer, message or wish for our new beginning.</p>
         <form id="blessingForm" class="blessing-form"><input required name="name" placeholder="Your name (max 25)"
-            maxlength="25" id="blessingNameInput">
-          <div style="text-align:right;font-size:0.7rem;color:var(--muted);margin-top:4px;"><span
-              id="blessingNameCount">0</span>/25</div><textarea required name="blessing"
+            maxlength="25" id="blessingNameInput"><textarea required name="blessing"
             placeholder="Your blessing or message (max 500 chars)" maxlength="500" id="blessingTextarea"></textarea>
           <div class="char-counter"><span id="charCount">0</span>/500 characters</div><button class="submit"
             type="submit">Send Blessing</button>
@@ -1255,7 +1266,6 @@
       <p>Kindly confirm your attendance and help us make every celebration as special as it can be.</p>
       <form id="rsvpForm">
         <input required name="name" placeholder="Your name (max 25)" maxlength="25" id="rsvpNameInput">
-        <div style="text-align:right;font-size:0.7rem;color:var(--muted);"><span id="rsvpNameCount">0</span>/25</div>
         <input required type="number" min="1" name="guests" id="rsvpGuestsInput" placeholder="Number of guests" min="1"
           max="10" placeholder="Number of guests (max 10)">
         <select required name="attendance">
@@ -1279,7 +1289,7 @@
   </section>
 
   <footer>
-    <div class="names">Prashasti &amp; Nicholas </div>
+    <div class="names">Shepherd Family </div>
     <div class="small">19 December 2026 · With love, always</div>
   </footer>
 
@@ -1375,17 +1385,6 @@
       }
       return json;
     }
-
-    function esc(v) {
-      return String(v ?? '').replace(/[&<>"']/g, c => ({
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#39;'
-      } [c]))
-    }
-
 
     function esc(v) {
       return String(v ?? '').replace(/[&<>"']/g, c => ({
@@ -1587,7 +1586,7 @@
     // Lightweight particle animations generated locally so the invitation does not depend on third-party animation hosting.
     (function initWeddingMotion() {
       const layer = document.getElementById('motionLayer');
-      if (!layer || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (!layer) return;
       const rand = (a, b) => Math.random() * (b - a) + a;
       const make = (cls, content = '') => {
         const e = document.createElement('span');
@@ -1677,13 +1676,23 @@
         startY = 0,
         isHoriz = null;
       track.addEventListener('touchstart', e => {
+        // If the touch starts inside the scrollable blessing text, let it
+        // scroll natively - don't arm the horizontal drag at all.
+        if (e.target.closest && e.target.closest('.blessing-text')) {
+          isDown = false;
+          isHoriz = null;
+          return;
+        }
         isDown = true;
         const t = e.touches[0];
         startX = t.pageX - track.offsetLeft;
         startY = t.pageY;
         scrollLeft = track.scrollLeft;
         isHoriz = null;
-        track.classList.add('dragging');
+        // NOTE: don't add 'dragging' class here - that sets pointer-events:none
+        // on the card and blocks vertical scrolling before we even know the
+        // gesture is horizontal. It's added only once horizontal intent is
+        // confirmed, in touchmove below.
       }, {
         passive: true
       });
@@ -1696,7 +1705,11 @@
         const walkX = x - startX;
         const walkY = y - startY;
         if (isHoriz === null) {
+          // Require a small threshold before deciding direction so tiny
+          // jitters don't get misread as a swipe.
+          if (Math.abs(walkX) < 6 && Math.abs(walkY) < 6) return;
           isHoriz = Math.abs(walkX) > Math.abs(walkY);
+          if (isHoriz) track.classList.add('dragging');
         }
         if (isHoriz) {
           e.preventDefault();
@@ -2134,7 +2147,11 @@
 
 
 <script>
-// === FINAL VERIFIED PATCH - Android + iOS + GitHub Pages - Display unchanged ===
+// === "Add to Calendar with Reminder" ===
+// Real <a> links with a Blob URL + download attribute. This is the standard,
+// most broadly compatible way to trigger a file download/"Add to Calendar"
+// prompt from a genuine click, and works the same whether this page is opened
+// by double-clicking the .html file, from a local server, or hosted online.
 (function() {
   function escapeICS(t){return (t||'').replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\r?\n/g,'\\n');}
   function toUTCFormat(d){return d.toISOString().replace(/[-:]/g,'').replace(/\.\d+Z/,'Z');}
@@ -2166,83 +2183,63 @@
       'SUMMARY:'+escapeICS(eventTitle||description||'Wedding'),
       'DESCRIPTION:'+escapeICS((description||'')+'\nDress Code: '+(dressCode||'')+'\nLocation: '+(location||'')),
       'LOCATION:'+escapeICS(location||''),'STATUS:CONFIRMED','SEQUENCE:0',
-      'BEGIN:VALARM','TRIGGER:-P1D','ACTION:DISPLAY','DESCRIPTION:Reminder','END:VALARM',
-      'BEGIN:VALARM','TRIGGER:-PT2H','ACTION:DISPLAY','DESCRIPTION:Reminder','END:VALARM',
+      'BEGIN:VALARM','TRIGGER:-PT1H','ACTION:DISPLAY','DESCRIPTION:Reminder - 1 hour to go','END:VALARM',
+      'BEGIN:VALARM','TRIGGER:-PT2H','ACTION:DISPLAY','DESCRIPTION:Reminder - 2 hours to go','END:VALARM',
       'END:VEVENT','END:VCALENDAR'
     ].join('\r\n');
   }
-  window.addToCalendarUniversal = function(eventTitle,startStr,endStr,location,description,dressCode){
-    try{
-      var ua=navigator.userAgent||'';
-      var isIOS=/iPad|iPhone|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
-      var isInApp=/FBAN|FBAV|FB_IAB|Instagram|WhatsApp|Line|Twitter|Snapchat/i.test(ua);
-      var startDate=parseDateAny(startStr);
-      var endDate=parseDateAny(endStr);
-      if(isNaN(startDate.getTime())){alert('Invalid date: '+startStr);return;}
-      if(isNaN(endDate.getTime())||endDate<=startDate){endDate=new Date(startDate.getTime()+2*60*60*1000);}
-      var ics=buildICS(eventTitle,startDate,endDate,location,description,dressCode);
-      var fileName=(eventTitle||'event').replace(/[^a-z0-9]/gi,'_')+'.ics';
-      var gCalUrl='https://calendar.google.com/calendar/render?action=TEMPLATE'
-        +'&text='+encodeURIComponent(eventTitle||description||'Wedding')
-        +'&dates='+toUTCFormat(startDate)+'/'+toUTCFormat(endDate)
-        +'&details='+encodeURIComponent((description||'')+'\nDress Code: '+(dressCode||''))
-        +'&location='+encodeURIComponent(location||'');
+  function gCalUrlFor(eventTitle,startDate,endDate,location,description,dressCode){
+    return 'https://calendar.google.com/calendar/render?action=TEMPLATE'
+      +'&text='+encodeURIComponent(eventTitle||description||'Wedding')
+      +'&dates='+toUTCFormat(startDate)+'/'+toUTCFormat(endDate)
+      +'&details='+encodeURIComponent((description||'')+'\nDress Code: '+(dressCode||''))
+      +'&location='+encodeURIComponent(location||'');
+  }
 
-      // 1. Web Share API - best for modern iOS/Android
-      if(navigator.canShare&&window.File){
-        try{
-          var file=new File([ics],fileName,{type:'text/calendar'});
-          if(navigator.canShare({files:[file]})){
-            navigator.share({files:[file],title:eventTitle,text:description}).catch(function(){});
-            return;
-          }
-        }catch(e){}
-      }
-      // 2. In-app (WhatsApp/Instagram) - blob blocked, use Google Calendar
-      if(isInApp){
-        window.open(gCalUrl,'_blank','noopener');
-        return;
-      }
-      // 3. iOS Safari - location.href with data URI
-      if(isIOS){
-        try{
-          var dataUri='data:text/calendar;charset=utf-8,'+encodeURIComponent(ics);
-          window.location.href=dataUri;
-          setTimeout(function(){window.open(gCalUrl,'_blank','noopener');},1200);
-        }catch(e){
-          window.open(gCalUrl,'_blank','noopener');
-        }
-        return;
-      }
-      // 4. Android & Desktop - Blob download
-      try{
-        var blob=new Blob([ics],{type:'text/calendar;charset=utf-8'});
-        var url=URL.createObjectURL(blob);
-        var a=document.createElement('a');
-        a.href=url;a.download=fileName;a.style.display='none';
-        document.body.appendChild(a);
-        a.click();
-        setTimeout(function(){try{document.body.removeChild(a);}catch(e){}URL.revokeObjectURL(url);},2000);
-      }catch(e){
-        window.open(gCalUrl,'_blank','noopener');
-      }
-    }catch(err){
-      console.error(err);
-      window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(description||eventTitle||'Wedding'),'_blank','noopener');
+  function wireLink(a){
+    var eventTitle = a.getAttribute('data-ics-title') || 'Wedding';
+    var location = a.getAttribute('data-ics-location') || '';
+    var description = a.getAttribute('data-ics-desc') || '';
+    var dressCode = a.getAttribute('data-ics-dress') || '';
+    var startDate = parseDateAny(a.getAttribute('data-ics-start'));
+    var endDate = parseDateAny(a.getAttribute('data-ics-end'));
+    if(isNaN(endDate.getTime())||endDate<=startDate){ endDate = new Date(startDate.getTime()+2*60*60*1000); }
+
+    var ics = buildICS(eventTitle,startDate,endDate,location,description,dressCode);
+    var fileName = eventTitle.replace(/[^a-z0-9]/gi,'_')+'.ics';
+    var gCalUrl = gCalUrlFor(eventTitle,startDate,endDate,location,description,dressCode);
+
+    var ua = navigator.userAgent||'';
+    var isInApp = /FBAN|FBAV|FB_IAB|Instagram|WhatsApp|Line|Twitter|Snapchat/i.test(ua);
+    if(isInApp){
+      // In-app browsers (WhatsApp/Instagram/FB) can't reliably handle file
+      // downloads - point straight at Google Calendar instead.
+      a.href = gCalUrl;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      return;
     }
-  };
-  window.addToCalendarICS=window.addToCalendarUniversal;
-  // Also attach event listeners to all calendar buttons for better mobile tap handling
-  document.addEventListener('DOMContentLoaded', function(){
-    document.querySelectorAll('.calendar-btn').forEach(function(btn){
-      btn.addEventListener('touchend', function(e){
-        // Prevent double trigger on touch devices
-        e.preventDefault();
-        btn.click();
-      }, {passive:false});
-    });
-  });
-  console.log('✅ Calendar ready - Android+iOS+GitHub Pages');
+
+    try{
+      var blob = new Blob([ics], {type:'text/calendar;charset=utf-8'});
+      a.href = URL.createObjectURL(blob);
+      a.setAttribute('download', fileName);
+    }catch(err){
+      a.href = gCalUrl;
+      a.target = '_blank';
+      a.rel = 'noopener';
+    }
+  }
+
+  function setup(){
+    document.querySelectorAll('.calendar-btn[data-ics-title]').forEach(wireLink);
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', setup);
+  } else {
+    setup();
+  }
 })();
 </script>
 
