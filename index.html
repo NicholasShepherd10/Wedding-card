@@ -1842,55 +1842,6 @@
     })();
   </script>
 
-
-
-
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const g = document.getElementById('rsvpGuestsInput');
-      if (g) {
-        g.value = '';
-        g.placeholder = 'Number of guests (max 10)';
-      }
-      const bn = document.getElementById('blessingNameInput');
-      const bc = document.getElementById('blessingNameCount');
-      if (bn) {
-        bn.addEventListener('input', function() {
-          if (this.value.length > 25) this.value = this.value.substring(0, 25);
-          if (bc) bc.textContent = this.value.length;
-        });
-      }
-      const bt = document.getElementById('blessingTextarea');
-      const cc = document.getElementById('charCount');
-      if (bt) {
-        bt.addEventListener('input', function() {
-          if (this.value.length > 500) this.value = this.value.substring(0, 500);
-          if (cc) cc.textContent = this.value.length;
-        });
-      }
-      const rn = document.getElementById('rsvpNameInput');
-      const rnc = document.getElementById('rsvpNameCount');
-      if (rn) {
-        rn.addEventListener('input', function() {
-          if (this.value.length > 25) this.value = this.value.substring(0, 25);
-          if (rnc) rnc.textContent = this.value.length;
-        });
-      }
-      const gi = document.getElementById('rsvpGuestsInput');
-      if (gi) {
-        gi.addEventListener('input', function() {
-          let v = parseInt(this.value);
-          if (v > 10) {
-            this.value = 10;
-            alert('Maximum 10 guests allowed');
-          }
-        });
-      }
-    });
-  </script>
-
-
   <div id="errorModal" class="error-modal">
     <div class="error-modal-content">
       <div class="error-modal-icon">!</div>
