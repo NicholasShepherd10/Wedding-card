@@ -1233,9 +1233,9 @@
       <div class="blessing-form-card reveal">
         <h3>Send Your Blessing</h3>
         <p>Write a prayer, message or wish for our new beginning.</p>
-        <form id="blessingForm" class="blessing-form"><input required name="name" placeholder="Your name (max 25)"
-            maxlength="25" id="blessingNameInput"><textarea required name="blessing"
-            placeholder="Your blessing or message (max 500 chars)" maxlength="500" id="blessingTextarea"></textarea>
+        <form id="blessingForm" class="blessing-form"><input required name="name" placeholder="Your name"
+            maxlength="50" id="blessingNameInput"><textarea required name="blessing"
+            placeholder="Your blessing or message" maxlength="500" id="blessingTextarea"></textarea>
           <div class="char-counter"><span id="charCount">0</span>/500 characters</div><button class="submit"
             type="submit">Send Blessing</button>
         </form>
@@ -1265,9 +1265,8 @@
       <h2>RSVP</h2>
       <p>Kindly confirm your attendance and help us make every celebration as special as it can be.</p>
       <form id="rsvpForm">
-        <input required name="name" placeholder="Your name (max 25)" maxlength="25" id="rsvpNameInput">
-        <input required type="number" min="1" name="guests" id="rsvpGuestsInput" placeholder="Number of guests" min="1"
-          max="10" placeholder="Number of guests (max 10)">
+        <input required name="name" placeholder="Your name" maxlength="50" id="rsvpNameInput">
+        <input required type="number" min="1" name="guests" id="rsvpGuestsInput" placeholder="Number of guests">
         <select required name="attendance">
           <option value="">Will you be joining us?</option>
           <option>Joyfully attending</option>
@@ -1279,7 +1278,7 @@
           <option>Church Wedding</option>
           <option>Reception</option>
         </select>
-        <textarea name="message" placeholder="A note for Prashasti & Nicholas (optional)"></textarea><button
+        <textarea name="message" placeholder="A note for the Family"></textarea><button
           class="submit" type="submit">Send RSVP</button>
       </form>
       <div id="thanks" style="display:none;color:var(--wine);border:1px solid #c59a5550;padding:18px">Thank you for
