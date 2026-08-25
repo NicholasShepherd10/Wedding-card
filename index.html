@@ -1891,19 +1891,19 @@
         }
         guestsInput.addEventListener('input', function() {
           let val = parseInt(this.value);
-          if (!isNaN(val) && val > 10) {
-            this.value = 10;
+          if (!isNaN(val) && val > 100) {
+            this.value = 100;
             showErrorModal('Guest Limit Exceeded',
-              'Maximum <strong>10 guests</strong> are allowed per RSVP.<br>Please enter a number between 1 and 10.'
+              'Maximum <strong>100 guests</strong> are allowed per RSVP.<br>Please enter a number between 1 and 100.'
               );
           }
         });
         guestsInput.addEventListener('blur', function() {
           let val = parseInt(this.value);
-          if (!isNaN(val) && val > 10) {
+          if (!isNaN(val) && val > 100) {
             showErrorModal('Guest Limit Exceeded', 'You entered <strong>' + val +
-              ' guests</strong>.<br>Maximum allowed is <strong>10 guests</strong> per RSVP.');
-            this.value = 10;
+              ' guests</strong>.<br>Maximum allowed is <strong>100 guests</strong> per RSVP.');
+            this.value = 100;
           }
         });
       }
@@ -1914,12 +1914,12 @@
             'rsvpGuestsInput');
           if (guests) {
             let val = parseInt(guests.value);
-            if (!isNaN(val) && val > 10) {
+            if (!isNaN(val) && val > 100) {
               e.preventDefault();
               showErrorModal('Cannot Submit', 'You have entered <strong>' + val +
-                ' guests</strong>.<br>Maximum allowed is <strong>10 guests</strong> per RSVP.<br><br>Please correct to 10 or less.'
+                ' guests</strong>.<br>Maximum allowed is <strong>100 guests</strong> per RSVP.<br><br>Please correct to 100 or less.'
                 );
-              guests.value = 10;
+              guests.value = 100;
               guests.focus();
               return false;
             }
